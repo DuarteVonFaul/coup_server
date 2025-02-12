@@ -1,6 +1,7 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from connection.connectionManage import manager
+from models.services.readyServices import ReadyServices
 
 
 app = FastAPI()
@@ -10,10 +11,8 @@ app = FastAPI()
 async def websocket_endpoint(websocket: WebSocket, client_id: int, username:str):
     await manager.connect(client_id,username,websocket)
     try: 
-        if(manager.users[0].id == client_id):
-            await manager.send_personal_message("Player Ready",websocket=websocket)
-        data = await websocket.receive_text()
-        await manager.broadcast()
+        
+        await ReadyServices(manager).joinGame()
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         await manager.broadcast()

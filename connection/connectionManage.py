@@ -59,6 +59,11 @@ class ConnectionManager:
             self.send_historic()
         ...
 
+    async def send_command(self, body, websocket: WebSocket):
+        {
+           await websocket.send_json(body)
+        }
+
 
     async def broadcast(self):
         for user in self.users:
