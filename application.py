@@ -6,13 +6,6 @@ from connection.connectionManage import manager
 app = FastAPI()
 
 
-@app.get("/")
-async def get():
-    with open("home.html", "r", encoding="utf-8") as file:
-        html_content = file.read()
-    return HTMLResponse(html_content)
-
-
 
 @app.websocket("/ws/{client_id}/{username}")
 async def websocket_endpoint(websocket: WebSocket, client_id: int, username:str):
