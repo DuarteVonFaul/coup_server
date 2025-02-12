@@ -19,13 +19,22 @@ class ConnectionManager:
     def __init__(self):
         self.historic:list[str] = []
         self.users:list[User] = []
+        self.userAction = 0
+        self.game = False
         pass
 
 
     async def connect(self, id:int,name:str ,websocket:WebSocket):
-        await websocket.accept()
-        self.users.append(User(id=id,name=name, webSocket=websocket))
+        if(not self.game):
+            await websocket.accept()
+            self.users.append(User(id=id,name=name, webSocket=websocket))
+        return {'message':'Jogo em andamento'}
         ...
+
+    
+    async def ready(self):
+        for user in self.users:
+            await user.webSocket.send_json({'id':self.userAction})
 
 
     def disconnect(self, websocket:WebSocket):
