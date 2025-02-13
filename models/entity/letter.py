@@ -6,6 +6,5 @@ class Letter(BaseModel):
 
     id:int
     name:str
-    image:str
     hide:bool
-    actions:list[Action]
+    actions:list[tuple]

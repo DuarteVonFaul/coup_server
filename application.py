@@ -14,7 +14,9 @@ async def websocket_endpoint(websocket:WebSocket, client_id: int, username:str):
         while True:
             data = await websocket.receive_text()
             if(data=='lobby'):
-                await ReadyServices(manager).joinGame()    
+                await ReadyServices(manager).joinGame()
+            elif(data=='ready'):
+                await ReadyServices(manager).ready()
             await manager.send_personal_message("Olá {username}",websocket)
             await manager.broadcast()
     except WebSocketDisconnect:
