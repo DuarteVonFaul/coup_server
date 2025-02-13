@@ -60,9 +60,8 @@ class ConnectionManager:
         ...
 
     async def send_command(self, body, websocket: WebSocket):
-        {
-           await websocket.send_json(body)
-        }
+        await websocket.send_json(body)
+        
 
 
     async def broadcast(self):
