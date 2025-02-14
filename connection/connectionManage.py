@@ -23,22 +23,22 @@ class SendAction(BaseModel):
 
 def letters(amount):
     cartas = [
-    [Letter(id=2, name='capitao', hide=False, actions=[
+    [Letter(id=2, name='capitao', hide=True, actions=[
         (ProtectiveAction.BLOCKTOSTEAL.name, ProtectiveAction.BLOCKTOSTEAL.value),
         (ProtectiveAction.BLOCKTOSTEAL.name, PrimaryAction.TOSTEAL.value)
     ]) for _ in range(amount)] +
-    [Letter(id=1, name='assassino', hide=False, actions=[
+    [Letter(id=1, name='assassino', hide=True, actions=[
         (PrimaryAction.KILLER.name, PrimaryAction.KILLER.value)
     ]) for _ in range(amount)] +
-    [Letter(id=3, name='condensa', hide=False, actions=[
+    [Letter(id=3, name='condensa', hide=True, actions=[
         (ProtectiveAction.BLOCKKILLER.name, ProtectiveAction.BLOCKKILLER.value)
     ]) for _ in range(amount)] +
-    [Letter(id=4, name='duque', hide=False, actions=[
+    [Letter(id=4, name='duque', hide=True, actions=[
         (BlockAction.BLOCKBUY3COINS.name, BlockAction.BLOCKBUY3COINS.value),
         (PrimaryAction.BUY3COINS.name, PrimaryAction.BUY3COINS.value),
         (BlockAction.BLOCKEXHELP.name, BlockAction.BLOCKEXHELP.value)
     ]) for _ in range(amount)] +
-    [Letter(id=5, name='embaixador', hide=False, actions=[
+    [Letter(id=5, name='embaixador', hide=True, actions=[
         (ProtectiveAction.BLOCKTOSTEAL.name, ProtectiveAction.BLOCKTOSTEAL.value),
         (PrimaryAction.CHANGELETTERS.name, PrimaryAction.CHANGELETTERS.value)
     ]) for _ in range(amount)]

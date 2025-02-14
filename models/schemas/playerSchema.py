@@ -6,4 +6,4 @@ class PlayerScheme(BaseModel):
     id:int
     name:str
     coins:int
-    letters:list[Letter]
+    letters:list[dict]

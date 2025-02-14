@@ -15,21 +15,21 @@ class PrimaryAction(Action):
     CHANGELETTERS = 6 #Embaixador
 
 class ChallengedActions(Action): #Apenas se ele for Desafiado
-    SHOWLETTERS = 1 
+    SHOWLETTERS = 7 
 
 class ThirdAction(Action):
     PASS = 0
-    CHALLENGE = 1
+    CHALLENGE = 8
 
-class ProtectiveAction(Action):
+class ProtectiveAction(Enum):
     PASS = 0
-    CHALLENGE = 1
-    BLOCKKILLER = 2 #Condensa
-    BLOCKTOSTEAL = 3 #capitao e embaixador
+    CHALLENGE = 8
+    BLOCKKILLER = 9 #Condensa
+    BLOCKTOSTEAL = 10 #capitao e embaixador
 
 
 class BlockAction(Action):
     PASS = 0
-    CHALLENGE = 1
-    BLOCKEXHELP = 2 #Duque
-    BLOCKBUY3COINS = 3 #Duque
+    CHALLENGE = 8
+    BLOCKEXHELP = 11 #Duque
+    BLOCKBUY3COINS = 12 #Duque
