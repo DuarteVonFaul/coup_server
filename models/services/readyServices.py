@@ -1,5 +1,6 @@
 from connection.connectionManage import ConnectionManager
 from models.schemas.playerSchema   import PlayerScheme
+from models.entity.actions         import PrimaryAction
 
 class ReadyServices():
 
@@ -32,23 +33,19 @@ class ReadyServices():
         for user in self.conn.users:
             if(user.id == self.conn.users[0].id):
                 players_dict = [player.model_dump() for player in players]
-                await self.conn.send_command({'commad':2,'data':{"players":players_dict, "action":["test"]}},user.webSocket)
+                await self.conn.send_command({'commad':2,'data':{"players":players_dict, "action":PrimaryAction}},user.webSocket)
             else:
                 players_dict = [player.model_dump() for player in players]
                 await self.conn.send_command({'commad':3,'data':{"players":players_dict, "action":"Aguarde sua vez de jogar"}},user.webSocket)
-        
 
         
 
-    async def Game(self, action):
+        
+
+    async def game(self, action):
         
         users = [user.model_dump(include={"id", "name"}) for user in self.conn.users]
-
-
-        for user in self.conn.users:
-            if(user.id == self.conn.users[0].id):
-                await self.conn.send_command({'commad':0,'data':users},user.webSocket)
-            else:
-                await self.conn.send_command({'commad':1,'data':users},user.webSocket)        
         
+              
+    
         ...

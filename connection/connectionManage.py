@@ -6,7 +6,7 @@ from models.entity.player   import Player
 from pydantic               import BaseModel
 from typing                 import Optional
 from models.entity.letter import Letter
-from models.entity.actions import BlockAction, PrimaryAction, ProtectiveAction
+from models.entity.actions import Action
 
 import random
 
@@ -24,23 +24,23 @@ class SendAction(BaseModel):
 def letters(amount):
     cartas = [
     [Letter(id=2, name='capitao', hide=True, actions=[
-        (ProtectiveAction.BLOCKTOSTEAL.name, ProtectiveAction.BLOCKTOSTEAL.value),
-        (ProtectiveAction.BLOCKTOSTEAL.name, PrimaryAction.TOSTEAL.value)
+        (Action.BLOCKTOSTEAL.name, Action.BLOCKTOSTEAL.value),
+        (Action.BLOCKTOSTEAL.name, Action.TOSTEAL.value)
     ]) for _ in range(amount)] +
     [Letter(id=1, name='assassino', hide=True, actions=[
-        (PrimaryAction.KILLER.name, PrimaryAction.KILLER.value)
+        (Action.KILLER.name, Action.KILLER.value)
     ]) for _ in range(amount)] +
     [Letter(id=3, name='condensa', hide=True, actions=[
-        (ProtectiveAction.BLOCKKILLER.name, ProtectiveAction.BLOCKKILLER.value)
+        (Action.BLOCKKILLER.name, Action.BLOCKKILLER.value)
     ]) for _ in range(amount)] +
     [Letter(id=4, name='duque', hide=True, actions=[
-        (BlockAction.BLOCKBUY3COINS.name, BlockAction.BLOCKBUY3COINS.value),
-        (PrimaryAction.BUY3COINS.name, PrimaryAction.BUY3COINS.value),
-        (BlockAction.BLOCKEXHELP.name, BlockAction.BLOCKEXHELP.value)
+        (Action.BLOCKBUY3COINS.name, Action.BLOCKBUY3COINS.value),
+        (Action.BUY3COINS.name, Action.BUY3COINS.value),
+        (Action.BLOCKEXHELP.name, Action.BLOCKEXHELP.value)
     ]) for _ in range(amount)] +
     [Letter(id=5, name='embaixador', hide=True, actions=[
-        (ProtectiveAction.BLOCKTOSTEAL.name, ProtectiveAction.BLOCKTOSTEAL.value),
-        (PrimaryAction.CHANGELETTERS.name, PrimaryAction.CHANGELETTERS.value)
+        (Action.BLOCKTOSTEAL.name, Action.BLOCKTOSTEAL.value),
+        (Action.CHANGELETTERS.name, Action.CHANGELETTERS.value)
     ]) for _ in range(amount)]
 ]
 
@@ -54,6 +54,7 @@ class ConnectionManager:
         self.historic:list[str] = []
         self.users:list[User] = []
         self.userAction = 0
+        self.userReaction = 1
         self.game = False
         self.letters:list[Letter] = []
         pass

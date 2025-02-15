@@ -1,5 +1,5 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.responses import HTMLResponse
+import json
 from connection.connectionManage import manager
 from models.services.readyServices import ReadyServices
 
@@ -12,12 +12,14 @@ async def websocket_endpoint(websocket:WebSocket, client_id: int, username:str):
     await manager.connect(client_id,username,websocket)
     try:
         while True:
-            data = await websocket.receive_text()
-            if(data=='lobby'):
+            data = json.loads(await websocket.receive_text())
+            print(data)
+            if(data['type']=='lobby'):
                 await ReadyServices(manager).joinGame()
-            elif(data=='ready'):
+            elif(data['type']=='ready'):
                 await ReadyServices(manager).ready()
-            await manager.send_personal_message("Olá {username}",websocket)
+            elif(data['type']=='Action'):
+                ...
             await manager.broadcast()
     except WebSocketDisconnect:
         manager.disconnect(websocket)
